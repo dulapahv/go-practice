@@ -8,7 +8,7 @@ import (
 
 	"github.com/antlr4-go/antlr/v4"
 
-	"gogram/parser"
+	"go-practice/parser"
 )
 
 func main() {
