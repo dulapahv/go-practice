@@ -1,6 +1,6 @@
 # go-practice
 
-Practice project for learning parser generation in Go using ANTLR4.
+Practicing Go by building a tiny arithmetic DSL with custom tokens using ANTLR.
 
 This repository contains:
 
