@@ -6,7 +6,7 @@
 
 `go get github.com/antlr4-go/antlr/v4`
 
-`go run . "1 + 2 * 3"` or `go run .`
+`go run . "nya nyya nyaa nyyyya nyaaa"` or `go run .`
 
 `go fmt`
 
