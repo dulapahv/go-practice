@@ -28,13 +28,13 @@ func main() {
 		expr = strings.TrimSpace(scanner.Text())
 	}
 
-	result, err := parseAndEval(expr)
+	res, err := parseAndEval(expr)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
 	}
 
-	fmt.Println(result)
+	fmt.Println(res)
 }
 
 func parseAndEval(expr string) (int, error) {
@@ -58,19 +58,19 @@ func evalExpr(ctx parser.IExpressionContext) (int, error) {
 
 	// Number literal
 	case *parser.NumberContext:
-		v, err := strconv.Atoi(node.NUMBER().GetText())
+		val, err := strconv.Atoi(node.NUMBER().GetText())
 		if err != nil {
 			return 0, fmt.Errorf("invalid number %q: %w", node.NUMBER().GetText(), err)
 		}
-		return v, nil
+		return val, nil
 
 	// Multiplication or division
 	case *parser.MulDivContext:
-		left, err := evalExpr(node.Expression(0))
+		l, err := evalExpr(node.Expression(0))
 		if err != nil {
 			return 0, err
 		}
-		right, err := evalExpr(node.Expression(1))
+		r, err := evalExpr(node.Expression(1))
 		if err != nil {
 			return 0, err
 		}
@@ -79,14 +79,14 @@ func evalExpr(ctx parser.IExpressionContext) (int, error) {
 
 		// Multiplication
 		case parser.CalcParserMUL:
-			return left * right, nil
+			return l * r, nil
 
 		// Division
 		case parser.CalcParserDIV:
-			if right == 0 {
+			if r == 0 {
 				return 0, fmt.Errorf("division by zero")
 			}
-			return left / right, nil
+			return l / r, nil
 
 		default:
 			return 0, fmt.Errorf("unsupported operator %q", node.GetOp().GetText())
@@ -94,11 +94,11 @@ func evalExpr(ctx parser.IExpressionContext) (int, error) {
 
 	// Addition or subtraction
 	case *parser.AddSubContext:
-		left, err := evalExpr(node.Expression(0))
+		l, err := evalExpr(node.Expression(0))
 		if err != nil {
 			return 0, err
 		}
-		right, err := evalExpr(node.Expression(1))
+		r, err := evalExpr(node.Expression(1))
 		if err != nil {
 			return 0, err
 		}
@@ -107,11 +107,11 @@ func evalExpr(ctx parser.IExpressionContext) (int, error) {
 
 		// Addition
 		case parser.CalcParserADD:
-			return left + right, nil
+			return l + r, nil
 
 		// Subtraction
 		case parser.CalcParserSUB:
-			return left - right, nil
+			return l - r, nil
 
 		default:
 			return 0, fmt.Errorf("unsupported operator %q", node.GetOp().GetText())
