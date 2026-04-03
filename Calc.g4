@@ -1,18 +1,22 @@
 grammar Calc;
 
-// Tokens
-MUL: '*';
-DIV: '/';
-ADD: '+';
-SUB: '-';
-NUMBER: [0-9]+;
-WHITESPACE: [ \r\n\t]+ -> skip;
+// Operators
+ADD: 'nyya';      // 2y
+SUB: 'nyyya';     // 3y
+MUL: 'nyyyya';    // 4y
+DIV: 'nyyyyya';   // 5y
 
-// Rules
+// Numbers
+NUMBER: 'ny' ('a')* | 'nyu';
+
+// Ignore whitespace
+WS: [ \r\n\t]+ -> skip;
+
+// Parser rules
 start : expression EOF;
 
 expression
-   : expression op=('*'|'/') expression # MulDiv
-   | expression op=('+'|'-') expression # AddSub
+   : expression op=(MUL|DIV) expression # MulDiv
+   | expression op=(ADD|SUB) expression # AddSub
    | NUMBER                             # Number
    ;

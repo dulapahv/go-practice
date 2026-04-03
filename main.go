@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 
 	"github.com/antlr4-go/antlr/v4"
@@ -58,11 +57,12 @@ func evalExpr(ctx parser.IExpressionContext) (int, error) {
 
 	// Number literal
 	case *parser.NumberContext:
-		val, err := strconv.Atoi(node.NUMBER().GetText())
-		if err != nil {
-			return 0, fmt.Errorf("invalid number %q: %w", node.NUMBER().GetText(), err)
+		text := node.NUMBER().GetText()
+		if text == "nyu" {
+			return 0, nil
 		}
-		return val, nil
+		count := strings.Count(text, "a")
+		return count, nil
 
 	// Multiplication or division
 	case *parser.MulDivContext:

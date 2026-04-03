@@ -33,10 +33,10 @@ var CalcParserStaticData struct {
 func calcParserInit() {
 	staticData := &CalcParserStaticData
 	staticData.LiteralNames = []string{
-		"", "'*'", "'/'", "'+'", "'-'",
+		"", "'nyya'", "'nyyya'", "'nyyyya'", "'nyyyyya'",
 	}
 	staticData.SymbolicNames = []string{
-		"", "MUL", "DIV", "ADD", "SUB", "NUMBER", "WHITESPACE",
+		"", "ADD", "SUB", "MUL", "DIV", "NUMBER", "WS",
 	}
 	staticData.RuleNames = []string{
 		"start", "expression",
@@ -45,7 +45,7 @@ func calcParserInit() {
 	staticData.serializedATN = []int32{
 		4, 1, 6, 22, 2, 0, 7, 0, 2, 1, 7, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1,
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 17, 8, 1, 10, 1, 12, 1, 20, 9,
-		1, 1, 1, 0, 1, 2, 2, 0, 2, 0, 2, 1, 0, 1, 2, 1, 0, 3, 4, 21, 0, 4, 1, 0,
+		1, 1, 1, 0, 1, 2, 2, 0, 2, 0, 2, 1, 0, 3, 4, 1, 0, 1, 2, 21, 0, 4, 1, 0,
 		0, 0, 2, 7, 1, 0, 0, 0, 4, 5, 3, 2, 1, 0, 5, 6, 5, 0, 0, 1, 6, 1, 1, 0,
 		0, 0, 7, 8, 6, 1, -1, 0, 8, 9, 5, 5, 0, 0, 9, 18, 1, 0, 0, 0, 10, 11, 10,
 		3, 0, 0, 11, 12, 7, 0, 0, 0, 12, 17, 3, 2, 1, 4, 13, 14, 10, 2, 0, 0, 14,
@@ -89,13 +89,13 @@ func NewCalcParser(input antlr.TokenStream) *CalcParser {
 
 // CalcParser tokens.
 const (
-	CalcParserEOF        = antlr.TokenEOF
-	CalcParserMUL        = 1
-	CalcParserDIV        = 2
-	CalcParserADD        = 3
-	CalcParserSUB        = 4
-	CalcParserNUMBER     = 5
-	CalcParserWHITESPACE = 6
+	CalcParserEOF    = antlr.TokenEOF
+	CalcParserADD    = 1
+	CalcParserSUB    = 2
+	CalcParserMUL    = 3
+	CalcParserDIV    = 4
+	CalcParserNUMBER = 5
+	CalcParserWS     = 6
 )
 
 // CalcParser rules.
